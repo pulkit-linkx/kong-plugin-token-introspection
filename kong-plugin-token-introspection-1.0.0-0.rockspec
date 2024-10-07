@@ -8,7 +8,7 @@ version = package_version .. "-" .. rockspec_revision
 supported_platforms = { "linux", "macosx" }
 
 source = {
-  url = "git://github.com/callistaenterprise/kong-plugin-token-introspection",
+  url = "git://github.com/pulkit-linkx/kong-plugin-token-introspection",
   tag = "v1.0.0",
   dir = "kong-plugin-mtls-auth"
 }
@@ -26,7 +26,7 @@ for the upstream service.
 If the access-token is bound to a Client Certificate ([RFC8705](https://www.rfc-editor.org/rfc/rfc8705.html)),
 the sha256 fingerprint specified in the access-token must match the sha256 fingerprint of a
 provided client certificate from another http header. The client certificate could be retrieved
-by e.g. the [mtls-auth](https://github.com/callistaenterprise/kong-plugin-mtls-auth) plugin.]],
+by e.g. the [mtls-auth](https://github.com/pulkit-linkx/kong-plugin-mtls-auth) plugin.]],
    homepage = "https://github.com/VentaApps/kong-token-introspection",
    license = "Apache 2.0"
 }

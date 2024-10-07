@@ -1,7 +1,8 @@
 # Kong access token introspection plugin
+
 Simple kong plugin that validates access tokens sent by developers using a third-party OAuth 2.0
 Authorization Server by leveraging its introspection endpoint ([RFC7662](https://tools.ietf.org/html/rfc7662)).
-The implementation is heavily inspired by [VentaApps/kong-token-introspection](https://github.com/VentaApps/kong-token-introspection).
+The implementation is heavily inspired by [VentaApps/kong-token-introspection](https://github.com/VentaApps/kong-token-introspection) and [callistaenterprise/kong-token-introspection](https://github.com/callistaenterprise/kong-token-introspection).
 
 The plugin protects an API using introspection of an OAuth 2.0 Access Token,
 retrieved from a request header. It uses the introspection
@@ -13,12 +14,12 @@ injected as http headers for the upstream service.
 If the access-token is bound to a Client Certificate ([RFC8705](https://www.rfc-editor.org/rfc/rfc8705.html)),
 the sha256 fingerprint specified in the access-token must match the sha256 fingerprint of a
 provided client certificate from another http header. The client certificate should be retrieved
-by e.g. the [mtls-auth](https://github.com/callistaenterprise/kong-plugin-mtls-auth) plugin.
+by e.g. the [mtls-auth](https://github.com/pulkit-linkx/kong-plugin-mtls-auth) plugin.
 
 # Configuration
 
 | Parameter                  | default       | description                                                                                                                                                             |
-|----------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `introspection_endpoint`   |               | External introspection endpoint compatible with RFC7662                                                                                                                 |
 | `introspection_ssl_verify` | true          | A boolean indicating whether to validate OAuth 2.0 introspection server certificate, if https/ssl is used                                                               |
 | `client_id`                |               | Client id used when calling introspection endpoint                                                                                                                      |
@@ -37,7 +38,7 @@ When a request has been authenticated, the plugin appends the following headers 
 before proxying it to the upstream API.
 
 | Header                    | description                                                          |
-|---------------------------|----------------------------------------------------------------------|
+| ------------------------- | -------------------------------------------------------------------- |
 | `X-Anonymous`             | set to true if access token is missing, and `allow_anonymous`is true |
 | `X-Credential-Scope`      | as returned by the Introspection response (if any)                   |
 | `X-Credential-Client-ID`  | as returned by the Introspection response (if any)                   |
@@ -59,7 +60,7 @@ Additionally, any claims specified in `custom_claims_forward` are also forwarded
   host:  upstream
   port: 80
   protocol: http
-  plugins: 
+  plugins:
   - name: mtls-auth
     config:
       upstream_cert_header: "x-client-cert"
